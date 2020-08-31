@@ -1,4 +1,4 @@
-#include "regular.h"
+#include "regular.icudt55l.dat.h"
 
 namespace youi_private {
 

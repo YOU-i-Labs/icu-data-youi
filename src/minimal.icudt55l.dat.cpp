@@ -1,4 +1,4 @@
-#include "minimal.h"
+#include "minimal.icudt55l.dat.h"
 
 namespace youi_private {
 

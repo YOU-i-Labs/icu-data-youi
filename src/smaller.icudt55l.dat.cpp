@@ -1,4 +1,4 @@
-#include "smaller.h"
+#include "smaller.icudt55l.dat.h"
 
 namespace youi_private {
 

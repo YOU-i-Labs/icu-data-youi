@@ -11,6 +11,9 @@ Dir["src/*"].each { |path|
     continue if path == "CMakeLists.txt"
     File.delete(path)
 }
+Dir["include/*"].each { |path|
+    File.delete(path)
+}
 
 files.each { |path|
     puts "Generating hexadecimal for '#{path}'..."
@@ -50,7 +53,7 @@ files.each { |path|
 
     # Generate main header
     puts "Generating source files..."
-    headerName = "src/#{filename}.h"
+    headerName = "include/#{filename}.#{icuFilename}.h"
     header = File.open(headerName, 'w')
 
     header.puts %Q|
@@ -70,11 +73,11 @@ size_t Get#{filename.capitalize}#{icuFunctionName}Size();
     |.strip
 
     # Generate source header
-    sourceName = "src/#{filename}.cpp"
+    sourceName = "src/#{filename}.#{icuFilename}.cpp"
     source = File.open(sourceName, 'w')
 
     source.puts %Q|
-#include "#{filename}.h"
+#include "#{filename}.#{icuFilename}.h"
 
 namespace youi_private {
 
