@@ -1,46 +1,15 @@
-cmake_minimum_required(VERSION 3.1)
-
-if(POLICY CMP0074)
-    cmake_policy(SET CMP0074 NEW)
-endif()
+cmake_minimum_required(VERSION 3.12)
 
 project(icu-data-youi VERSION 1.0.0)
 
-# if(MSVC)
-#     #setup pdb info
-#     set(pdb_output_dir "${CMAKE_CURRENT_BINARY_DIR}/pdb-files")
-
-#     set(CMAKE_PDB_OUTPUT_DIRECTORY "${pdb_output_dir}")
-#     set(CMAKE_COMPILE_PDB_OUTPUT_DIRECTORY "${pdb_output_dir}")
-
-#     #need to sync pdp files
-#     add_compile_options("/FS")
-# endif()
-
-# set(IMGUI_IMPL_DEFINES)
-
-# TODO glob headers and source files
-set(ICU_DATA_YOUI_HEADERS
-    include/minimal.icudt55l.dat.h
-    include/smaller.icudt55l.dat.h
-    #include/regular.icudt55l.dat.h
-)
-
-set(ICU_DATA_YOUI_SOURCE
-    src/minimal.icudt55l.dat.cpp
-    src/smaller.icudt55l.dat.cpp
-    #src/regular.icudt55l.dat.cpp
-)
-
-# include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
+file(GLOB ICU_DATA_YOUI_HEADERS include/*.h)
+file(GLOB ICU_DATA_YOUI_SOURCE src/*.cpp)
 
 add_library(icu-data-youi ${ICU_DATA_YOUI_HEADERS} ${ICU_DATA_YOUI_SOURCE})
 
 target_include_directories(icu-data-youi
-    PRIVATE include/
+    PRIVATE include
 )
-
-# target_compile_definitions(icu-data-youi PUBLIC ${IMGUI_IMPL_DEFINES})
 
 #Install icu-data-youi
 # Introduce variables:
@@ -59,7 +28,7 @@ set(NAMESPACE "${PROJECT_NAME}::")
 
 #install header files
 install(FILES ${ICU_DATA_YOUI_HEADERS}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/icu-data-youi)
 
 #build and install project config
 include(CMakePackageConfigHelpers)
@@ -73,7 +42,6 @@ configure_package_config_file(
 write_basic_package_version_file(
     "${VERSION_CONFIG}"
     COMPATIBILITY AnyNewerVersion
-
 )
 
 #install target
@@ -99,25 +67,3 @@ install(
     NAMESPACE "${NAMESPACE}"
     DESTINATION "${INSTALL_CONFIGDIR}"
 )
-
-# if(MSVC)
-#     #install pdbs
-#     get_cmake_property(is_multi GENERATOR_IS_MULTI_CONFIG)
-
-#     if(is_multi)
-#       set(config_suffix "$<CONFIG>")
-#     else()
-#       set(config_suffix "")
-#     endif()
-
-#     if(BUILD_SHARED_LIBS)
-#       set(pdb_dst ${CMAKE_INSTALL_BINDIR})
-#     else()
-#       set(pdb_dst ${CMAKE_INSTALL_LIBDIR})
-#     endif()
-
-#     install(
-#         DIRECTORY "${pdb_output_dir}/${config_suffix}/"
-#         DESTINATION ${pdb_dst}
-#     )
-# endif()
