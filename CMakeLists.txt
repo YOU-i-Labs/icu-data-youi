@@ -19,16 +19,17 @@ project(icu-data-youi VERSION 1.0.0)
 
 # set(IMGUI_IMPL_DEFINES)
 
+# TODO glob headers and source files
 set(ICU_DATA_YOUI_HEADERS
     include/minimal.icudt55l.dat.h
     include/smaller.icudt55l.dat.h
-    include/regular.icudt55l.dat.h
+    #include/regular.icudt55l.dat.h
 )
 
 set(ICU_DATA_YOUI_SOURCE
     src/minimal.icudt55l.dat.cpp
     src/smaller.icudt55l.dat.cpp
-    src/regular.icudt55l.dat.cpp
+    #src/regular.icudt55l.dat.cpp
 )
 
 # include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
