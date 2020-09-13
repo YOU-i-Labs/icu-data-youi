@@ -27,3 +27,10 @@ is installed.
 The script will automatically split header files so that their size does not
 exceed ~90MB (and thus can still be committed and pushed to Github). The headers
 are recombined in the generated .cpp files.
+
+# Modifying data files
+
+An ICU data file can be modified using the icupkg tool. This tool ships with ICU
+itself, as well as can be found in the .hunter directory when building You.i
+Engine from source. The scripts under script/ can be used to facilitate unpacking
+and repacking ICU data files.
