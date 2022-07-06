@@ -2,9 +2,16 @@ cmake_minimum_required(VERSION 3.12)
 
 project(icu-data-youi VERSION 1.0.0)
 
-file(GLOB ICU_DATA_YOUI_HEADERS include/*.h)
-file(GLOB ICU_DATA_YOUI_SOURCE src/*.cpp)
+set(ICU_DATA_YOUI_HEADERS include/minimal.icudt55l.dat.h include/smaller.icudt55l.dat.h)
+set(ICU_DATA_YOUI_SOURCE  src/minimal.icudt55l.dat.cpp   src/smaller.icudt55l.dat.cpp)
 
+option(ICUDATA_BUILD_REGULAR "Add the regular ICU data file" ON )
+if (ICUDATA_BUILD_REGULAR)
+    list(APPEND ICU_DATA_YOUI_SOURCE  src/regular.icudt55l.dat.cpp)
+    list(APPEND ICU_DATA_YOUI_HEADERS include/regular.icudt55l.dat.h)
+endif()
+
+message(STATUS "Building icu-data-youi with src: ${ICU_DATA_YOUI_SOURCE}")
 add_library(icu-data-youi ${ICU_DATA_YOUI_HEADERS} ${ICU_DATA_YOUI_SOURCE})
 
 target_include_directories(icu-data-youi
